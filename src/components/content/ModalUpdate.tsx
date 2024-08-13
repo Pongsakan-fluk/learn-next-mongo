@@ -1,57 +1,53 @@
-'use client'
+"use client";
 import { useRef, useState } from "react";
-import { FiPlus } from "react-icons/fi";
+import { FiTrash2, FiChevronRight } from "react-icons/fi";
 
-export type Value = {
-  title: String,
-  price: Number,
-  category: String,
-  description: String,
-  image: String
-};
+//Type
+import { Value } from "./ModalCreate";
 
-function ModalCreate() {
+type Props = {};
+
+function ModalUpdate({}: Props) {
 
   const value = useRef<Value>({
     title: "",
     price: 0,
     category: "",
     description: "",
-    image: ""
-  })
+    image: "",
+  });
 
-  const handleChange = (e:any) => {
+  const handleChange = (e: any) => {
     value.current = { ...value.current, [e.target.name]: e.target.value };
-  }
+  };
 
   const handleSubmit = () => {
     console.log(value);
-    
-  }
+  };
 
   return (
     <div className="drawer">
-      <input id="my-drawer" type="checkbox" className="drawer-toggle" />
+      <input id="my-drawer2" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
         {/* Button + open modal */}
         <label
-          htmlFor="my-drawer"
-          className="btn btn-success btn-circle text-white btn-sm drawer-button"
+          htmlFor="my-drawer2"
+          className="btn btn-square btn-sm drawer-button"
         >
-          <FiPlus size={25} />
+          <FiChevronRight size={25} />
         </label>
       </div>
 
       <div className="drawer-side z-10">
         <label
-          htmlFor="my-drawer"
+          htmlFor="my-drawer2"
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
 
         {/* modal content */}
         <div className="bg-base-200 min-h-full w-96 py-20 text-primary flex flex-col items-center rounded-r-[25px]">
-          <h2 className="text-center">Create product</h2>
+          <h2 className="text-center">Update product</h2>
 
           {/* Form Create */}
           <div className="mt-5 space-y-2">
@@ -108,11 +104,16 @@ function ModalCreate() {
             </label>
           </div>
           {/* Button Submit */}
-          <button className="btn btn-primary uppercase mx-auto mt-5" onClick={handleSubmit}>Submit</button>
+          <button
+            className="btn btn-primary uppercase mx-auto mt-5"
+            onClick={handleSubmit}
+          >
+            Submit
+          </button>
         </div>
       </div>
     </div>
   );
 }
 
-export default ModalCreate;
+export default ModalUpdate;

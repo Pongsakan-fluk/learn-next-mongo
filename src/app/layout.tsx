@@ -20,10 +20,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="">
+        <div className="bg-slate-100">
           <Navbar />
 
-          <main className="flex justify-center">
+          <main className="flex justify-center w-full mt-5 rounded-t-[50px] bg-white">
             {children}
           </main>
         </div>

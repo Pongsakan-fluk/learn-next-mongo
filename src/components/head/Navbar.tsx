@@ -5,7 +5,7 @@ type Props = {};
 
 function Navbar({}: Props) {
   return (
-    <div className="navbar bg-primary text-primary-content flex justify-between items-center px-5">
+    <div className="navbar flex bg-white justify-between items-center px-5 rounded-b-[35px] drop-shadow-lg">
       <Link href="/" className="btn btn-ghost text-xl">
         daisyUI
       </Link>
@@ -15,7 +15,7 @@ function Navbar({}: Props) {
           <li>
             <details>
               <summary>Test SWR</summary>
-              <ul className="w-40 bg-primary text-primary-content">
+              <ul className="w-40">
                 <li>
                   <Link href="/swr1">Custom SWR</Link>
                 </li>
