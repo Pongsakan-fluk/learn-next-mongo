@@ -2,38 +2,49 @@
 import { useRef, useState } from "react";
 import { FiTrash2, FiChevronRight } from "react-icons/fi";
 
+//functions
+import { updateProduct } from "@/functions/product";
+
 //Type
 import { Value } from "./ModalCreate";
+import { Product } from "./TableData";
+import { title } from "process";
 
 type Props = {
-    id: string
+  data: Product;
 };
 
-function ModalUpdate({ id }: Props) {
-
-  const value = useRef<Value>({
-    title: "",
-    price: 0,
-    category: "",
-    description: "",
-    image: "",
+function ModalUpdate({ data }: Props) {
+  const [value, setValue] = useState<Value>({
+    title: data?.title,
+    price: data?.price,
+    category: data?.category,
+    description: data?.description,
+    image: data?.image,
   });
 
   const handleChange = (e: any) => {
-    value.current = { ...value.current, [e.target.name]: e.target.value };
+    setValue({ ...value, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = () => {
-    console.log(value);
+    /* console.log(value); */
+
+    updateProduct(value, data._id)
+      .then((res) => {
+        /* console.log(res.data); */
+        alert(`Update product ${res.data.title} success!`)
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
     <div className="drawer">
-      <input id="my-drawer2" type="checkbox" className="drawer-toggle" />
+      <input id={data._id} type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
         {/* Button + open modal */}
         <label
-          htmlFor="my-drawer2"
+          htmlFor={data._id}
           className="btn btn-square btn-sm drawer-button"
         >
           <FiChevronRight size={25} />
@@ -42,7 +53,7 @@ function ModalUpdate({ id }: Props) {
 
       <div className="drawer-side z-10">
         <label
-          htmlFor="my-drawer2"
+          htmlFor={data._id}
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
@@ -50,7 +61,7 @@ function ModalUpdate({ id }: Props) {
         {/* modal content */}
         <div className="bg-base-200 min-h-full w-96 py-20 text-primary flex flex-col items-center rounded-r-[25px]">
           <h2 className="text-center">Update product</h2>
-          <p>{ id }</p>
+          <p>{value.title}</p>
 
           {/* Form Create */}
           <div className="mt-5 space-y-2">
@@ -62,6 +73,7 @@ function ModalUpdate({ id }: Props) {
                 name="title"
                 placeholder="Enter Title"
                 className="input input-bordered w-full max-w-xs"
+                value={value.title}
                 onChange={handleChange}
               />
             </label>
@@ -72,6 +84,7 @@ function ModalUpdate({ id }: Props) {
                 type="number"
                 name="price"
                 className="input input-bordered w-full max-w-xs"
+                value={value.price}
                 onChange={handleChange}
               />
             </label>
@@ -82,6 +95,7 @@ function ModalUpdate({ id }: Props) {
                 type="text"
                 name="category"
                 className="input input-bordered w-full max-w-xs"
+                value={value.category}
                 onChange={handleChange}
               />
             </label>
@@ -92,6 +106,7 @@ function ModalUpdate({ id }: Props) {
                 type="text"
                 name="image"
                 className="input input-bordered w-full max-w-xs"
+                value={value.image}
                 onChange={handleChange}
               />
             </label>
@@ -102,6 +117,7 @@ function ModalUpdate({ id }: Props) {
                 type="text"
                 name="description"
                 className="input input-bordered w-full max-w-xs"
+                value={value.description}
                 onChange={handleChange}
               />
             </label>

@@ -4,9 +4,23 @@ import { FiX } from "react-icons/fi";
 //Components
 import ModalUpdate from "./ModalUpdate";
 
-type Props = {};
+type Props = {
+  data: any;
+};
 
-function TableData({}: Props) {
+export type Product = {
+  category: string;
+  createdAt: string;
+  description: string;
+  image: string;
+  price: number;
+  title: string;
+  updatedAt: string;
+  __v: number;
+  _id: string;
+};
+
+function TableData({ data }: Props) {
   return (
     <div className="overflow-x-auto">
       <table className="table">
@@ -24,26 +38,25 @@ function TableData({}: Props) {
         </thead>
         <tbody>
           {/* row 1 */}
-          <tr className="hover">
-            <th>1</th>
-            <td>Cy Ganderton</td>
-            <td>Quality Control Specialist</td>
-            <td>5</td>
-            <td>Description</td>
-            <td><button className="btn btn-circle btn-sm btn-error"><FiX size={22} /></button></td>
-            {/* Send data */}
-            <td><ModalUpdate id="1" /></td>
-          </tr>
-          {/* row 2 */}
-          <tr className="hover">
-            <th>2</th>
-            <td>Hart Hagerty</td>
-            <td>Desktop Support Technician</td>
-            <td>4</td>
-            <td>Description</td>
-            <td><button className="btn btn-circle btn-sm btn-error"><FiX size={22} /></button></td>
-            <td><ModalUpdate id="2" /></td>
-          </tr>
+          {data &&
+            data.map((item:Product, idx:number) => (
+              <tr className="hover" key={idx}>
+                <th>{idx + 1}</th>
+                <td>{item.title}</td>
+                <td>{item.category}</td>
+                <td>{item.price}</td>
+                <td>{item.description}</td>
+                <td>
+                  <button className="btn btn-circle btn-sm btn-error">
+                    <FiX size={22} />
+                  </button>
+                </td>
+                {/* Send data */}
+                <td>
+                  <ModalUpdate data={item} />
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>

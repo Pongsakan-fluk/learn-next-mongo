@@ -20,8 +20,13 @@ export async function GET(req: NextRequest, { params }: Params) {
 //Update data
 export async function PUT(req: NextRequest, { params }: Params) {
   const { id }= params;
+  const { title, price, description, category, image } = await req.json();
 
-  return NextResponse.json({"id": id, "methode": "Update"});
+  await connectMongoDB();
+
+  const response = await Product.findOneAndUpdate({ _id: id}, { title, price, description, category, image })
+
+  return NextResponse.json(response);
 }
 
 //Update data

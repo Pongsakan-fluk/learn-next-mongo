@@ -2,12 +2,15 @@
 import { useRef, useState } from "react";
 import { FiPlus } from "react-icons/fi";
 
+//functions
+import { createProduct } from "@/functions/product";
+
 export type Value = {
-  title: String;
-  price: Number;
-  category: String;
-  description: String;
-  image: String;
+  title: string | number | readonly string[] | undefined;
+  price: string | number | readonly string[] | undefined;
+  category: string | number | readonly string[] | undefined;
+  description: string | number | readonly string[] | undefined;
+  image: string | number | readonly string[] | undefined;
 };
 
 function ModalCreate() {
@@ -25,7 +28,16 @@ function ModalCreate() {
   };
 
   const handleSubmit = () => {
-    console.log(value);
+    /* console.log(value); */
+
+    createProduct(value.current)
+    .then((res) => {
+      /* console.log(res); */
+      alert(`Create product ${res.data.title} success!`)
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   };
 
   return (
@@ -75,6 +87,7 @@ function ModalCreate() {
               <input
                 type="number"
                 name="price"
+                placeholder="Enter Price"
                 className="input input-bordered w-full max-w-xs"
                 onChange={handleChange}
               />
@@ -85,6 +98,7 @@ function ModalCreate() {
               <input
                 type="text"
                 name="category"
+                placeholder="Enter Category"
                 className="input input-bordered w-full max-w-xs"
                 onChange={handleChange}
               />
@@ -95,6 +109,7 @@ function ModalCreate() {
               <input
                 type="text"
                 name="image"
+                placeholder="Enter Image"
                 className="input input-bordered w-full max-w-xs"
                 onChange={handleChange}
               />
@@ -105,6 +120,7 @@ function ModalCreate() {
               <input
                 type="text"
                 name="description"
+                placeholder="Enter Description"
                 className="input input-bordered w-full max-w-xs"
                 onChange={handleChange}
               />

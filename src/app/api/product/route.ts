@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
+//Connect DB
 import { connectMongoDB } from "../../../../lib/mongodb";
+//Model Or Table
 import { Product } from "../../../../models/product";
 
 //List data  //Arrow function 
@@ -7,9 +9,9 @@ export const GET = async () => {
   await connectMongoDB();
 
   //find and return all data
-  const data = Product.find({});
+  const response = await Product.find({});
 
-  return NextResponse.json(data);
+  return NextResponse.json(response);
 }
 
 //Create data
@@ -20,9 +22,9 @@ export async function POST(req: NextRequest, res: NextResponse) {
   //Connect Database
   await connectMongoDB();
   //Insert to Database
-  Product.create({ title, price, description, category, image })
+  const response = await Product.create({ title, price, description, category, image })
 
   //Convert to json and return
-  return NextResponse.json({title: title, method: "POST"});
+  return NextResponse.json(response);
 }
 

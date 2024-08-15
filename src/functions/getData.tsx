@@ -12,7 +12,7 @@ const options = {
 export const listData = (url: string) => {
   const fetcher = () => axios(url).then((res) => res.data);
 
-  const { data, error, isLoading, mutate } = useSWR(url, fetcher, options);
+  const { data, error, isLoading, mutate } = useSWR(url, fetcher/* , options */);
 
   return {
     data: data,
