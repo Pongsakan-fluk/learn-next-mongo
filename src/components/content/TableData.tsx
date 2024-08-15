@@ -1,5 +1,5 @@
 import React from "react";
-import { FiTrash2 } from "react-icons/fi";
+import { FiX } from "react-icons/fi";
 
 //Components
 import ModalUpdate from "./ModalUpdate";
@@ -30,8 +30,9 @@ function TableData({}: Props) {
             <td>Quality Control Specialist</td>
             <td>5</td>
             <td>Description</td>
-            <td><FiTrash2 /></td>
-            <td><ModalUpdate /></td>
+            <td><button className="btn btn-circle btn-sm btn-error"><FiX size={22} /></button></td>
+            {/* Send data */}
+            <td><ModalUpdate id="1" /></td>
           </tr>
           {/* row 2 */}
           <tr className="hover">
@@ -40,8 +41,8 @@ function TableData({}: Props) {
             <td>Desktop Support Technician</td>
             <td>4</td>
             <td>Description</td>
-            <td><FiTrash2 /></td>
-            <td><ModalUpdate /></td>
+            <td><button className="btn btn-circle btn-sm btn-error"><FiX size={22} /></button></td>
+            <td><ModalUpdate id="2" /></td>
           </tr>
         </tbody>
       </table>

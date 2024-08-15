@@ -5,9 +5,11 @@ import { FiTrash2, FiChevronRight } from "react-icons/fi";
 //Type
 import { Value } from "./ModalCreate";
 
-type Props = {};
+type Props = {
+    id: string
+};
 
-function ModalUpdate({}: Props) {
+function ModalUpdate({ id }: Props) {
 
   const value = useRef<Value>({
     title: "",
@@ -48,6 +50,7 @@ function ModalUpdate({}: Props) {
         {/* modal content */}
         <div className="bg-base-200 min-h-full w-96 py-20 text-primary flex flex-col items-center rounded-r-[25px]">
           <h2 className="text-center">Update product</h2>
+          <p>{ id }</p>
 
           {/* Form Create */}
           <div className="mt-5 space-y-2">

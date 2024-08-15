@@ -20,12 +20,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="bg-slate-100">
+        <div className="bg-slate-100 flex flex-col min-h-screen">
           <Navbar />
 
-          <main className="flex justify-center w-full mt-5 rounded-t-[50px] bg-white">
+          <main className="flex justify-center w-full mt-5 rounded-t-[50px] bg-white grow">
             {children}
           </main>
+
+          <footer className="p-5 bg-green-200 rounded-t-[25px]">
+            <h2 className="text-center text-white">Footer</h2>
+          </footer>
         </div>
       </body>
     </html>

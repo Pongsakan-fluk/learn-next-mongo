@@ -1,33 +1,32 @@
-'use client'
+"use client";
 import { useRef, useState } from "react";
 import { FiPlus } from "react-icons/fi";
 
 export type Value = {
-  title: String,
-  price: Number,
-  category: String,
-  description: String,
-  image: String
+  title: String;
+  price: Number;
+  category: String;
+  description: String;
+  image: String;
 };
 
 function ModalCreate() {
-
+  const [open, setOpen] = useState<boolean>(false);
   const value = useRef<Value>({
     title: "",
     price: 0,
     category: "",
     description: "",
-    image: ""
-  })
+    image: "",
+  });
 
-  const handleChange = (e:any) => {
+  const handleChange = (e: any) => {
     value.current = { ...value.current, [e.target.name]: e.target.value };
-  }
+  };
 
   const handleSubmit = () => {
     console.log(value);
-    
-  }
+  };
 
   return (
     <div className="drawer">
@@ -38,11 +37,15 @@ function ModalCreate() {
           htmlFor="my-drawer"
           className="btn btn-success btn-circle text-white btn-sm drawer-button"
         >
-          <FiPlus size={25} />
+          <FiPlus
+            size={25}
+            className={`${open && "rotate-45"} transition duration-300 ease-in-out`}
+            onClick={() => setOpen(true)}
+          />
         </label>
       </div>
 
-      <div className="drawer-side z-10">
+      <div className="drawer-side z-10" onClick={() => setOpen(false)}>
         <label
           htmlFor="my-drawer"
           aria-label="close sidebar"
@@ -108,7 +111,12 @@ function ModalCreate() {
             </label>
           </div>
           {/* Button Submit */}
-          <button className="btn btn-primary uppercase mx-auto mt-5" onClick={handleSubmit}>Submit</button>
+          <button
+            className="btn btn-primary uppercase mx-auto mt-5"
+            onClick={handleSubmit}
+          >
+            Submit
+          </button>
         </div>
       </div>
     </div>
